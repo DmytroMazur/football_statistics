@@ -3,21 +3,27 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\api\FootballApiController;
+
 class HomeController extends Controller
 {
-
-    protected $footballApi;
-    
-    public function __construct(FootballApiController $footballApi)
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
     {
-        $this->footballApi = $footballApi;
+       $this->middleware('auth');
     }
 
-    public function index(){
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function index()
+    {
         
-        $teams = $this->footballApi->getTeamsStatistics();
-        dd($teams);
+        return view('home');
     }
-
 }

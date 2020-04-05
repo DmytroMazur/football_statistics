@@ -4,7 +4,8 @@ namespace App\Http\Controllers\admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use App\Country;
+use App\Http\Requests\StoreCountry;
 class CountryController extends Controller
 {
     /**
@@ -15,6 +16,10 @@ class CountryController extends Controller
     public function index()
     {
         
+        $countries = $this->getCountries();
+        
+        return view('admin/country/index', ['countries' => $countries ]);
+    
     }
 
     /**
@@ -24,7 +29,7 @@ class CountryController extends Controller
      */
     public function create()
     {
-        
+        return view('admin/country/show');
     }
 
     /**
@@ -33,9 +38,18 @@ class CountryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreCountry $request)
     {
-        //
+        $request->validated();
+
+        $country = $request->get('country');
+
+        Country::firstOrCreate(array(
+            'country_name' => $country
+            ) 
+        );
+
+        return redirect()->route('country_index');
     }
 
     /**
@@ -57,7 +71,10 @@ class CountryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $country = $this->getCountry($id);
+
+        return view('admin/country/show',['country' => $country]);
+        
     }
 
     /**
@@ -78,8 +95,26 @@ class CountryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $countryId = $request->get('id');
+        $deleteCountry = $this->getCountry($countryId)->delete();
+        
+        if($deleteCountry) return 'true';
+    
+        return 'false';
+    }
+
+    public function getCountries(){
+        
+        return Country::all();
+    
+    }
+
+    public function getCountry($id=NULL){
+        
+        if(!empty($id)) return Country::findOrFail($id);
+
+        return false;
     }
 }

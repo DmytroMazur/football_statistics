@@ -23,11 +23,18 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <script src="{{ asset('jquery/jquery/jquery.min.js') }}">  </script>
+    <script src="{{ asset('boostrap/js/bootstrap.bundle.min.js') }}" > </script>
 </head>
 <body>
-    @yield('menu')
-    @yield('content')
+    <div class="d-flex" id="wrapper">           
+        @include('admin.menu') 
+        @yield('content')
+        
+        </div>
+        <!-- /#page-content-wrapper -->
+      </div>
+    <div>
 </body>
-    {{ asset('jquery/jquery.min.js') }}
-    {{ asset('js/bootstrap.bundle.min.js') }}
 </html>

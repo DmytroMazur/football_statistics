@@ -134,11 +134,11 @@ class CityController extends Controller
         return 'false';
     }
 
-    private function getCities(){
+    public function getCities(){
         return City::all();
     }
 
-    private function getCity($id){
+    public function getCity($id){
         return City::with('country')->findOrFail($id); 
     }
 }

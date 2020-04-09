@@ -33,4 +33,10 @@ Route::group(['prefix'=>'admin',  'middleware' => 'auth'], function(){
     Route::post('/city/store','admin\CityController@store')->name('store_city');
     Route::get('/city/edit/{id}','admin\CityController@edit')->name('edit_city');
     Route::post('/city/delete','admin\CityController@destroy')->name('delete_city');
+
+    Route::get('/post','admin\PostController@index')->name('post_index');  
+    Route::get('/post/create','admin\PostController@create')->name('create_post'); 
+    Route::post('/post/store','admin\PostController@store')->name('store_post');
+    Route::get('/post/edit/{id}','admin\PostController@edit')->name('edit_post');
+    Route::post('/post/delete','admin\PostController@destroy')->name('delete_post');
 });

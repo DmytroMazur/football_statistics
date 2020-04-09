@@ -1,7 +1,7 @@
 @extends('admin.index')
 
 @section('content')
-
+<a class="btn btn-primary" href="{{ route('create_country') }}" role="button">Create</a>
 <div class="container-fluid">
 <table class="table table-bordered">
     <thead>

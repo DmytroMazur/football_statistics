@@ -4,7 +4,7 @@ namespace App\Exceptions;
 
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 class Handler extends ExceptionHandler
 {
     /**
@@ -46,6 +46,30 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        
+        if($request->expectsJson()){
+            $response = [
+                'errors' => 'Sorry, something went wrong.'
+            ];
+    
+            if (config('app.debug')) {
+                $response['exception'] = get_class($exception); 
+                $response['message'] = $exception->getMessage();
+                $response['trace'] = $exception->getTrace();
+            }    
+
+            $status = 400;
+
+            if ($this->isHttpException($exception)) {
+                $status = $exception->getStatusCode();
+            }
+            return response()->json($response, $status);
+
+        }
+        else if ($exception instanceof ModelNotFoundException) {
+            return redirect()->route('index_login');
+        }
+        
         return parent::render($request, $exception);
     }
 }

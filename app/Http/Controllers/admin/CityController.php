@@ -122,11 +122,9 @@ class CityController extends Controller
     public function destroy(Request $request)
     {
         $cityId = $request->get('id');
-        $deleteCity = $this->getCity($cityId)->delete();
+        $this->getCity($cityId)->delete();
         
-        if($deleteCity) return 'true';
-    
-        return 'false';
+        return 'true';
     }
 
 }

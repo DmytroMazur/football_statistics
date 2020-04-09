@@ -101,11 +101,9 @@ class CountryController extends Controller
     public function destroy(Request $request)
     {
         $countryId = $request->get('id');
-        $deleteCountry = $this->getCountry($countryId)->delete();
+        $this->getCountry($countryId)->delete();
         
-        if($deleteCountry) return 'true';
-    
-        return 'false';
+        return 'true';
     }
 
 }

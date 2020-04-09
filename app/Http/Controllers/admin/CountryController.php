@@ -6,8 +6,11 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Country;
 use App\Http\Requests\StoreCountry;
+use App\Traits\CountryCity;
 class CountryController extends Controller
 {
+    use CountryCity;
+   
     /**
      * Display a listing of the resource.
      *
@@ -105,16 +108,4 @@ class CountryController extends Controller
         return 'false';
     }
 
-    public function getCountries(){
-        
-        return Country::all();
-    
-    }
-
-    public function getCountry($id=NULL){
-        
-        if(!empty($id)) return Country::findOrFail($id);
-
-        return false;
-    }
 }

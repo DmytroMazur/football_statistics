@@ -5,9 +5,9 @@ use App\City;
 
 trait CountryCity {
  
-    protected function getCountries(){
+    protected function getCountries($countryName = NULL){
 
-        return Country::all();
+        return Country::with('city')->get();
     
     }
 

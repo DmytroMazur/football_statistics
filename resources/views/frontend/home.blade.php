@@ -75,7 +75,7 @@
             <div class="row">
                 @foreach ($countries as $country)
                     <div class="col-md-4 col-sm-4 fh5co-item-wrap">
-                        <a class="fh5co-listing-item">
+                    <a class="fh5co-listing-item" >
                             
                             <img src="{{ asset('upload/frontend/img-1.jpg') }}" alt="Free HTML5 Bootstrap Template by FreeHTML5.co" class="img-responsive">
                             <div class="fh5co-listing-copy">

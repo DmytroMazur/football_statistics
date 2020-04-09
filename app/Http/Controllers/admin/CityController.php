@@ -8,16 +8,11 @@ use App\City;
 use App\Country;
 use App\Http\Controllers\admin\CountryController;
 use App\Http\Requests\StoreCity;
-
+use App\Traits\CountryCity;
 
 class CityController extends Controller
 {
-
-    protected $country;
-    public function __construct(CountryController $countryController)
-    {
-         $this->country = $countryController;
-    }
+    use CountryCity;
 
     /**
      * Display a listing of the resource.
@@ -39,7 +34,7 @@ class CityController extends Controller
     public function create()
     {
         $countrySelect = array();
-        $allCoutries = $this->country->getCountries();
+        $allCoutries = $this->getCountries();
         
         foreach($allCoutries as $country ){
             $countrySelect[$country->id] = $country->country_name;
@@ -95,7 +90,7 @@ class CityController extends Controller
         
         $countrySelect[$city->country->id] = $city->country->country_name; 
         
-        $allCoutries = $this->country->getCountries();        
+        $allCoutries = $this->getCountries();        
         
         foreach($allCoutries as $country ){
             if($country->id != $city->country->id){
@@ -134,11 +129,4 @@ class CityController extends Controller
         return 'false';
     }
 
-    public function getCities(){
-        return City::all();
-    }
-
-    public function getCity($id){
-        return City::with('country')->findOrFail($id); 
-    }
 }

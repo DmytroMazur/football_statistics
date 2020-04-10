@@ -13,5 +13,9 @@ class City extends Model
     public function country(){
         return $this->belongsTo('App\Country');
     }
+
+    public function posts(){
+        return $this->hasMany('App\Post');
+    }
     
 }

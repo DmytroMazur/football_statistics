@@ -7,9 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
     protected $table = 'post';
-    protected $fillable = array('title','description', 'city_id');
+    protected $fillable = array('title','description', 'city_id', 'slug', 'short_description');
 
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
     public function city(){
         return $this->belongsTo('App\City');
     }
+    
 }

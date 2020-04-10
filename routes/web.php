@@ -10,12 +10,15 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', 'HomeController@index')->name('home');
-
 Auth::routes();
 
-Route::get('/home', 'frontend\HomeController@index')->name('home');
+Route::get('/', 'frontend\HomeController@index')->name('home');
+
+Route::post('/get-cities', 'frontend\HomeController@getCities')->name('get-cities');
+
+Route::get('/posts/{cityName}', 'frontend\PostController@getCityPosts')->name('get-posts');
+
+Route::get('/posts/{city}/{post}', 'frontend\PostController@getDetailPost')->name('get-detail-post');
 
 Route::group(['prefix'=>'admin',  'middleware' => 'auth'], function(){
     

@@ -46,27 +46,30 @@
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.16/dist/summernote.min.js"></script> --}}
     {{-- <script src="{{ asset('js/app.js') }}" defer></script> --}} 
     
-    <script src="{{ asset('js/frontend/jquery.min.js') }}" defer></script>
-    <script src="{{ asset('js/frontend/bootstrap.min.js') }}" defer></script>
-    <script src="{{ asset('js/frontend/google_map.js') }}" defer></script>
-    <script src="{{ asset('js/frontend/hoverIntent.js') }}" defer></script>
-    <script src="{{ asset('js/frontend/jquery.easing.1.3.js') }}" defer></script>
+    <script src="{{ asset('js/frontend/jquery.min.js') }}" ></script>
+    <script src="{{ asset('js/frontend/bootstrap.min.js') }}" ></script>
+    <script src="{{ asset('js/frontend/google_map.js') }}" ></script>
+    <script src="{{ asset('js/frontend/hoverIntent.js') }}" ></script>
+    <script src="{{ asset('js/frontend/jquery.easing.1.3.js') }}" ></script>
     
-    <script src="{{ asset('js/frontend/jquery.stellar.min.js') }}" defer></script>
-    <script src="{{ asset('js/frontend/jquery.waypoints.min.js') }}" defer></script>
-    <script src="{{ asset('js/frontend/main.js') }}" defer></script>
-    <script src="{{ asset('js/frontend/modernizr-2.6.2.min.js') }}" defer></script>
-    <script src="{{ asset('js/frontend/respond.min.js') }}" defer></script>
-    <script src="{{ asset('js/frontend/superfish.js') }}" defer></script>
+    <script src="{{ asset('js/frontend/jquery.stellar.min.js') }}" ></script>
+    <script src="{{ asset('js/frontend/jquery.waypoints.min.js') }}" ></script>
+    <script src="{{ asset('js/frontend/main.js') }}" ></script>
+    <script src="{{ asset('js/frontend/modernizr-2.6.2.min.js') }}" ></script>
+    <script src="{{ asset('js/frontend/respond.min.js') }}" ></script>
+    <script src="{{ asset('js/frontend/superfish.js') }}" ></script>
+    <script src="{{ asset('js/frontend/frontend.js') }}" ></script>
     
     <!-- End Scripts -->
 
 </head>
 <body>
+    @include('frontend/header')
     
-       {{-- @include('admin.menu')  --}} 
-        @yield('content')
-        
-        
+    @yield('content')   
+
+
+    @include('frontend/footer')
+
 </body>
 </html>

@@ -18,6 +18,9 @@
     {{ Form::text('title',  $post->title ) }}
     {{ Form::label('city', 'City') }} 
     {{ Form::select('city_id', $postSelect) }}
+    <br/>
+    {{ Form::label('short_description', 'Short description') }} 
+    <textarea name="short_desription">{{ $post->short_description }}</textarea>
     <textarea class="summernote" name="description">{{ $post->description }}</textarea>
 
     @else
@@ -25,7 +28,9 @@
     {{ Form::text('title') }}
     {{ Form::label('city', 'City') }} 
     {{ Form::select('city_id', $postSelect) }}
-    
+    <br/> 
+    {{ Form::label('short_description', 'Short description') }}
+    <textarea name="short_desription"></textarea>
     <textarea class="summernote" name="description"></textarea>
   @endif
   

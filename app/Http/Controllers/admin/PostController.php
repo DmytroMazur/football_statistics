@@ -8,15 +8,12 @@ use App\Post;
 use App\Http\Controllers\admin\CityController;
 use App\Http\Requests\StorePost;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-
+use App\Traits\CountryCity;
+use Illuminate\Support\Str;
 class PostController extends Controller
 {
 
-    protected $city;
-    public function __construct(CityController $cityController)
-    {
-         $this->city = $cityController;
-    }
+    use CountryCity;
 
     /**
      * Display a listing of the resource.
@@ -37,7 +34,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        $allCities = $this->city->getCities();        
+        $allCities = $this->getCities();        
         
         foreach($allCities as $city ){
             $postSelect[$city->id] = $city->name;
@@ -62,12 +59,17 @@ class PostController extends Controller
         
         $cityId = $request->get('city_id');
            
+        $shortDescription = $request->get('short_desription');
+        
         Post::updateOrCreate(
             [
                 'title' => $title,
             ],[
                 'description'  => $description,
-                'city_id'  => $cityId 
+                'short_description' => $shortDescription,
+                'slug'  => Str::slug($title, '-'), 
+                'city_id'  => $cityId,
+                
             ]
         );
 
@@ -100,7 +102,7 @@ class PostController extends Controller
 
         $postSelect[$post->city->id] = $post->city->name; 
         
-        $allCities = $this->city->getCities();        
+        $allCities = $this->getCities();        
         
         foreach($allCities as $city ){
             if($city->id != $post->city->id){
@@ -181,8 +183,11 @@ class PostController extends Controller
                 $img->setAttribute('src', '/public'.$image_name);
             }
         }
-
-       return $dom->saveHTML();
-
+        $html = $dom->saveHTML();
+        $html = preg_replace("/<body>/", '' ,$html);
+        $html = preg_replace("/<html>/", '' ,$html);
+        $html = preg_replace("#</html>#", '' ,$html,-1);
+        $html = preg_replace("#</body>#", '' ,$html,-1);
+        return $html;
     }
 }

@@ -322,6 +322,7 @@ class ComposerStaticInit2c80861a8c90ad6ef89432e2395f1d67
     public static $classMap = array (
         'App\\City' => __DIR__ . '/../..' . '/app/City.php',
         'App\\Comment' => __DIR__ . '/../..' . '/app/Comment.php',
+        'App\\Console\\Commands\\SendNewsletter' => __DIR__ . '/../..' . '/app/Console/Commands/SendNewsletter.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Country' => __DIR__ . '/../..' . '/app/Country.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
@@ -362,8 +363,6 @@ class ComposerStaticInit2c80861a8c90ad6ef89432e2395f1d67
         'App\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/app/Providers/EventServiceProvider.php',
         'App\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/app/Providers/RouteServiceProvider.php',
         'App\\Role' => __DIR__ . '/../..' . '/app/Role.php',
-        'App\\Traits\\CountryCity' => __DIR__ . '/../..' . '/app/Traits/CountryCity.php',
-        'App\\Traits\\Post' => __DIR__ . '/../..' . '/app/Traits/Post.php',
         'App\\User' => __DIR__ . '/../..' . '/app/User.php',
         'Carbon\\Carbon' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Carbon.php',
         'Carbon\\CarbonImmutable' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/CarbonImmutable.php',

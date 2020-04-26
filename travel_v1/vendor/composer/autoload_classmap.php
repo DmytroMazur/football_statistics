@@ -8,6 +8,7 @@ $baseDir = dirname($vendorDir);
 return array(
     'App\\City' => $baseDir . '/app/City.php',
     'App\\Comment' => $baseDir . '/app/Comment.php',
+    'App\\Console\\Commands\\SendNewsletter' => $baseDir . '/app/Console/Commands/SendNewsletter.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Country' => $baseDir . '/app/Country.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
@@ -48,8 +49,6 @@ return array(
     'App\\Providers\\EventServiceProvider' => $baseDir . '/app/Providers/EventServiceProvider.php',
     'App\\Providers\\RouteServiceProvider' => $baseDir . '/app/Providers/RouteServiceProvider.php',
     'App\\Role' => $baseDir . '/app/Role.php',
-    'App\\Traits\\CountryCity' => $baseDir . '/app/Traits/CountryCity.php',
-    'App\\Traits\\Post' => $baseDir . '/app/Traits/Post.php',
     'App\\User' => $baseDir . '/app/User.php',
     'Carbon\\Carbon' => $vendorDir . '/nesbot/carbon/src/Carbon/Carbon.php',
     'Carbon\\CarbonImmutable' => $vendorDir . '/nesbot/carbon/src/Carbon/CarbonImmutable.php',

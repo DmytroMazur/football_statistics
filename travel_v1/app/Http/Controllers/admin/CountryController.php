@@ -19,7 +19,7 @@ class CountryController extends Controller
     public function index()
     {
         
-        $countries = $this->getCountries();
+        $countries = Country::getCountries();
         
         return view('admin/country/index', ['countries' => $countries ]);
     
@@ -74,7 +74,7 @@ class CountryController extends Controller
      */
     public function edit($id)
     {
-        $country = $this->getCountry($id);
+        $country = Country::getCountry($id);
 
         return view('admin/country/show',['country' => $country]);
         
@@ -101,7 +101,8 @@ class CountryController extends Controller
     public function destroy(Request $request)
     {
         $countryId = $request->get('id');
-        $this->getCountry($countryId)->delete();
+
+        Country::getCountry($countryId)->delete();
         
         return 'true';
     }

@@ -43,7 +43,7 @@ class SendNewsletter extends Command
         $emailsSuscriber = Newsletter::all();
         $date = Carbon::now()->subDay()->toDateTimeString();
         
-        $posts = $this->getPosts($date);        
+        $posts = Post::where('created_at', '>', $date)->get();
         
         if(count($posts) > 0){
             foreach($posts as $post){
@@ -54,8 +54,4 @@ class SendNewsletter extends Command
         }
     
     }   
-
-    private function getPosts($date ){
-        return Post::where('created_at', '>', $date)->get();
-    }
 }

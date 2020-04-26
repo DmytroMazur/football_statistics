@@ -14,8 +14,8 @@ class NewsletterController extends Controller
         
         $email = $storeNewsletter->get('email');
         
-        $checkEmail = $this->checkEmail($email);
-        
+        $checkEmail = Newsletter::checkNewsletterEmail($email);
+       
         if(empty($checkEmail)){
                 Newsletter::create(array(
                     'email' => $email  
@@ -26,7 +26,4 @@ class NewsletterController extends Controller
         return response()->json('ko');
     }
 
-    private function checkEmail($email){
-        return Newsletter::where('email',$email)->first();
-    }
 }

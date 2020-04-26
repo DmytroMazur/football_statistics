@@ -16,12 +16,11 @@ class NewsletterController extends Controller
         
         $checkEmail = $this->checkEmail($email);
         
-
         if(empty($checkEmail)){
-            Newsletter::create(array(
-                'email' => $email  
+                Newsletter::create(array(
+                    'email' => $email  
             ));
-            
+        
             return response()->json('ok');
         } 
         return response()->json('ko');

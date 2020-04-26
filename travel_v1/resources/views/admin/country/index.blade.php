@@ -17,7 +17,7 @@
         <tr>
           <th scope="row">{{ $country->id }}</th>
           <td> {{ $country->country_name }} </td>
-        <td><a class="btn btn-primary" href="{{ route('edit_country', ['id' =>  $country->id ]) }}" role="button">Edit</a> /  <a class="btn btn-primary" id="destroy_country" href="{{ route('delete_country') }}" data-id="{{ $country->id }}" role="button">Borrar</a> </td>    
+        <td><a class="btn btn-primary" href="{{ route('edit_country', ['id' =>  $country->id ]) }}" role="button">Edit</a> /  <a class="btn btn-primary destroy_country" href="{{ route('delete_country') }}" data-id="{{ $country->id }}" role="button">Borrar</a> </td>    
         </tr>
       @endforeach
     </tbody>
@@ -26,11 +26,11 @@
 
 <script>
   $( document ).ready( function(){
-    $("#destroy_country").click(function(e){
+    $(".destroy_country").click(function(e){
       e.preventDefault();
       
       url = "{{route('delete_country')}}";
-      countryId = $("#destroy_country").attr("data-id");
+      countryId = $(this).attr("data-id");
       
       $.ajax({
         method: 'POST',

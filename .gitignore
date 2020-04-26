@@ -3,7 +3,7 @@
 /public/upload
 /public/storage
 /storage/*.key
-/vendor
+/travel_v1/vendor
 /databases
 .env
 .env.backup

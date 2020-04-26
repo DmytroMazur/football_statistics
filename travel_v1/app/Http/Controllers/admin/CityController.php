@@ -21,8 +21,8 @@ class CityController extends Controller
      */
     public function index()
     {
-        $cities = $this->getCities();
-        
+        $cities = City::getCities();
+
         return view('admin/city/index',['cities'=> $cities]);
     }
 
@@ -34,7 +34,7 @@ class CityController extends Controller
     public function create()
     {
         $countrySelect = array();
-        $allCoutries = $this->getCountries();
+        $allCoutries = Country::getCountries();
         
         foreach($allCoutries as $country ){
             $countrySelect[$country->id] = $country->country_name;
@@ -86,11 +86,11 @@ class CityController extends Controller
     {
         $countrySelect =array();
         
-        $city = $this->getCity($id);
-        
+        $city = City::getCity($id);
+
         $countrySelect[$city->country->id] = $city->country->country_name; 
         
-        $allCoutries = $this->getCountries();        
+        $allCoutries = Country::getCountries();        
         
         foreach($allCoutries as $country ){
             if($country->id != $city->country->id){
@@ -122,7 +122,7 @@ class CityController extends Controller
     public function destroy(Request $request)
     {
         $cityId = $request->get('id');
-        $this->getCity($cityId)->delete();
+        City::getCity($cityId)->delete();
         
         return 'true';
     }

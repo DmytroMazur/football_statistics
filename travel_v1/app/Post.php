@@ -14,7 +14,18 @@ class Post extends Model
         return 'slug';
     }
     public function city(){
-        return $this->belongsTo('App\City');
+        return $this->belongsTo(City::class);
+    }
+
+    public static function getPost($id){        
+        return $this->findOrFail($id);
+    }
+
+    public static function getPosts($cityName = Null){
+        
+        if(!empty($cityName)) return City::with('posts')->where('name', $cityName)->first();
+        
+        return PostModel::all();
     }
     
 }

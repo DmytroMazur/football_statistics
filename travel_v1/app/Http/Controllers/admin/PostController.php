@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Post;
+use App\City;
 use App\Http\Controllers\admin\CityController;
 use App\Http\Requests\StorePost;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -22,7 +23,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = $this->getPosts();
+        $posts = Post::all(); 
 
         return view('admin/post/index', ['posts' => $posts]);
     }
@@ -34,7 +35,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        $allCities = $this->getCities();        
+        $allCities = City::getCities();        
         
         foreach($allCities as $city ){
             $postSelect[$city->id] = $city->name;
@@ -98,11 +99,11 @@ class PostController extends Controller
         
         $postSelect =array();
         
-        $post = $this->getPost($id);
-
+        $post = Post::findOrFail($id);
+        
         $postSelect[$post->city->id] = $post->city->name; 
         
-        $allCities = $this->getCities();        
+        $allCities = City::getCities();        
         
         foreach($allCities as $city ){
             if($city->id != $post->city->id){
@@ -136,18 +137,9 @@ class PostController extends Controller
     public function destroy(Request $request)
     {
         $postId = $request->get('id');
-        $deleteCity = $this->getPost($postId)->delete();
+        $deleteCity = $this->findOrFail($postId)->delete();
     
         return 'true';
-    }
-    private function getPosts(){
-        return Post::all();
-    }
-
-    private function getPost($id){
-        
-        return Post::findOrFail($id);
-        
     }
 
     private function getDescription($description){

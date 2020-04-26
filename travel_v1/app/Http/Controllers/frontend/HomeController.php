@@ -4,12 +4,11 @@ namespace App\Http\Controllers\frontend;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Traits\CountryCity;
+
+use App\Country;
 
 class HomeController extends Controller
 {
-    use CountryCity;
-
     protected $data;
 
     public function __construct()
@@ -21,7 +20,7 @@ class HomeController extends Controller
         
         $data = array();
         
-        $countries = $this->getCountries();         
+        $countries = Country::getCountries();         
                
         $data['countries'] = $countries;
          
@@ -32,7 +31,7 @@ class HomeController extends Controller
         
         $cityName = $request->get("contryName");
         
-        $cities = $this->getCountries($cityName);
+        $cities = Country::getCountries($cityName);
 
         $cities->city->each(function ($item, $key) {
             $this->data[$key]['name'] = $item->name;

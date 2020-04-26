@@ -5,16 +5,16 @@ namespace App\Http\Controllers\frontend;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use App\Post as AppPost;
+use App\Post;
 use App\Comment;
 use App\City;
 use App\Http\Requests\StoreComment;
-use App\Traits\Post;
-use App\Traits\CountryCity;
+
+
 
 class PostController extends Controller
 {
-    use Post, CountryCity;
+    
     
     protected $data;
 
@@ -25,7 +25,7 @@ class PostController extends Controller
 
     public function getCityPosts($cityName){
         
-        $posts = $this->getPosts($cityName);
+        $posts = Post::getPosts($cityName);
         
         $this->data['cityName'] = $cityName;
 
@@ -34,7 +34,7 @@ class PostController extends Controller
         return view('frontend/post_list', $this->data);
     }
 
-    public function getDetailPost($cityName ,AppPost $post){
+    public function getDetailPost($cityName ,Post $post){
         
         $comments = $this->getCityComments($post->city_id);
        
@@ -64,6 +64,18 @@ class PostController extends Controller
             'message' => 'ok'
         ));
 
+    }
+
+    private function getCityComments($cityId){
+        $comments = City::with('postComments')->find($cityId);
+        
+        $comments->postComments->each(function($item, $key) use($comments) {
+            
+            $comments->postComments[$key]->user_name = $item->with('user')->first()->user->name;
+            
+        });
+
+        return $comments;
     }
 
     

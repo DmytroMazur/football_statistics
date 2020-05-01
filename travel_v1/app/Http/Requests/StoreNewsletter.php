@@ -26,8 +26,8 @@ class StoreNewsletter extends FormRequest
         return [
             'email' => 'required'
         ];
-        
     }
+
     public function messages()
     {
         return [

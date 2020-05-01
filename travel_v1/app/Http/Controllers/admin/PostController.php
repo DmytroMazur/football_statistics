@@ -11,6 +11,7 @@ use App\Http\Requests\StorePost;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Traits\CountryCity;
 use Illuminate\Support\Str;
+
 class PostController extends Controller
 {
 
@@ -23,8 +24,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::all(); 
-
+        $posts = Post::all();
         return view('admin/post/index', ['posts' => $posts]);
     }
 
@@ -35,13 +35,11 @@ class PostController extends Controller
      */
     public function create()
     {
-        $allCities = City::getCities();        
-        
-        foreach($allCities as $city ){
+        $allCities = City::getCities();
+        foreach ($allCities as $city) {
             $postSelect[$city->id] = $city->name;
         }
-
-        return view('admin/post/show', ['postSelect'=> $postSelect]);
+        return view('admin/post/show', ['postSelect' => $postSelect]);
     }
 
     /**
@@ -53,28 +51,22 @@ class PostController extends Controller
     public function store(StorePost $request)
     {
         $request->validated();
-        
         $description = $this->getDescription($request->input('description'));
-        
         $title = $request->get('title');
-        
         $cityId = $request->get('city_id');
-           
         $shortDescription = $request->get('short_desription');
-        
         Post::updateOrCreate(
             [
                 'title' => $title,
-            ],[
-                'description'  => $description,
+            ],
+            [
+                'description' => $description,
                 'short_description' => $shortDescription,
-                'slug'  => Str::slug($title, '-'), 
-                'city_id'  => $cityId,
-                
+                'slug' => Str::slug($title, '-'),
+                'city_id' => $cityId,
             ]
         );
-
-        return redirect()->route('post_index');        
+        return redirect()->route('post_index');
     }
 
     /**
@@ -96,24 +88,17 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        
-        $postSelect =array();
-        
+        $postSelect = array();
         $post = Post::findOrFail($id);
-        
-        $postSelect[$post->city->id] = $post->city->name; 
-        
-        $allCities = City::getCities();        
-        
-        foreach($allCities as $city ){
-            if($city->id != $post->city->id){
+        $postSelect[$post->city->id] = $post->city->name;
+        $allCities = City::getCities();
+        foreach ($allCities as $city) {
+            if ($city->id != $post->city->id) {
                 $postSelect[$city->id] = $city->name;
             }
         }
-
-       //return view('admin/city/show', ['city' => $city, 'countrySelect' => $countrySelect]);
-
-        return view('admin/post/show', ['post' => $post, 'postSelect'=> $postSelect]);
+        //return view('admin/city/show', ['city' => $city, 'countrySelect' => $countrySelect]);
+        return view('admin/post/show', ['post' => $post, 'postSelect' => $postSelect]);
     }
 
     /**
@@ -138,48 +123,33 @@ class PostController extends Controller
     {
         $postId = $request->get('id');
         $deleteCity = $this->findOrFail($postId)->delete();
-    
         return 'true';
     }
 
-    private function getDescription($description){
-        
+    private function getDescription($description)
+    {
         $detail = $description;
-        
         $dom = new \DomDocument();
-        
-        $dom->loadHtml($detail, LIBXML_HTML_NODEFDTD);    
-        
+        $dom->loadHtml($detail, LIBXML_HTML_NODEFDTD);
         $images = $dom->getElementsByTagName('img');
-        
-        foreach($images as $k => $img){
-            
+        foreach ($images as $k => $img) {
             $data = $img->getAttribute('src');
-            
-            if(count(explode(';', $data)) > 1){
-
+            if (count(explode(';', $data)) > 1) {
                 list($type, $data) = explode(';', $data);
-
-                list(, $data)      = explode(',', $data);
-
+                list(, $data) = explode(',', $data);
                 $data = base64_decode($data);
-
-                $image_name= "/upload/" . time().$k.'.png';
-
-                $path = public_path() . $image_name;
-                
+                $image_name = "/upload/".time().$k.'.png';
+                $path = public_path().$image_name;
                 file_put_contents($path, $data);
-
                 $img->removeAttribute('src');
-
                 $img->setAttribute('src', '/public'.$image_name);
             }
         }
         $html = $dom->saveHTML();
-        $html = preg_replace("/<body>/", '' ,$html);
-        $html = preg_replace("/<html>/", '' ,$html);
-        $html = preg_replace("#</html>#", '' ,$html,-1);
-        $html = preg_replace("#</body>#", '' ,$html,-1);
+        $html = preg_replace("/<body>/", '', $html);
+        $html = preg_replace("/<html>/", '', $html);
+        $html = preg_replace("#</html>#", '', $html, -1);
+        $html = preg_replace("#</body>#", '', $html, -1);
         return $html;
     }
 }

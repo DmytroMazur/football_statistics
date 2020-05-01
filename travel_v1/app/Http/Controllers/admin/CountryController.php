@@ -7,10 +7,11 @@ use App\Http\Controllers\Controller;
 use App\Country;
 use App\Http\Requests\StoreCountry;
 use App\Traits\CountryCity;
+
 class CountryController extends Controller
 {
     use CountryCity;
-   
+
     /**
      * Display a listing of the resource.
      *
@@ -18,11 +19,8 @@ class CountryController extends Controller
      */
     public function index()
     {
-        
         $countries = Country::getCountries();
-        
-        return view('admin/country/index', ['countries' => $countries ]);
-    
+        return view('admin/country/index', ['countries' => $countries]);
     }
 
     /**
@@ -44,14 +42,12 @@ class CountryController extends Controller
     public function store(StoreCountry $request)
     {
         $request->validated();
-
         $country = $request->get('country');
-
-        Country::firstOrCreate(array(
-            'country_name' => $country
-            ) 
+        Country::firstOrCreate(
+            array(
+                'country_name' => $country
+            )
         );
-
         return redirect()->route('country_index');
     }
 
@@ -75,9 +71,7 @@ class CountryController extends Controller
     public function edit($id)
     {
         $country = Country::getCountry($id);
-
-        return view('admin/country/show',['country' => $country]);
-        
+        return view('admin/country/show', ['country' => $country]);
     }
 
     /**
@@ -101,9 +95,7 @@ class CountryController extends Controller
     public function destroy(Request $request)
     {
         $countryId = $request->get('id');
-
         Country::getCountry($countryId)->delete();
-        
         return 'true';
     }
 

@@ -22,8 +22,7 @@ class CityController extends Controller
     public function index()
     {
         $cities = City::getCities();
-
-        return view('admin/city/index',['cities'=> $cities]);
+        return view('admin/city/index', ['cities' => $cities]);
     }
 
     /**
@@ -35,11 +34,9 @@ class CityController extends Controller
     {
         $countrySelect = array();
         $allCoutries = Country::getCountries();
-        
-        foreach($allCoutries as $country ){
+        foreach ($allCoutries as $country) {
             $countrySelect[$country->id] = $country->country_name;
         }
-        
         return view('admin/city/show', ['countrySelect' => $countrySelect]);
     }
 
@@ -52,16 +49,14 @@ class CityController extends Controller
     public function store(StoreCity $request)
     {
         $request->validated();
-        
         $cityName = $request->get('city');
         $countryId = $request->get('country_id');
-        
-        City::firstOrCreate(array(
-            'name' => $cityName,
-            'country_id'   => $countryId 
-            ) 
+        City::firstOrCreate(
+            array(
+                'name' => $cityName,
+                'country_id' => $countryId
+            )
         );
-
         return redirect()->route('city_index');
     }
 
@@ -84,20 +79,15 @@ class CityController extends Controller
      */
     public function edit($id)
     {
-        $countrySelect =array();
-        
+        $countrySelect = array();
         $city = City::getCity($id);
-
-        $countrySelect[$city->country->id] = $city->country->country_name; 
-        
-        $allCoutries = Country::getCountries();        
-        
-        foreach($allCoutries as $country ){
-            if($country->id != $city->country->id){
+        $countrySelect[$city->country->id] = $city->country->country_name;
+        $allCoutries = Country::getCountries();
+        foreach ($allCoutries as $country) {
+            if ($country->id != $city->country->id) {
                 $countrySelect[$country->id] = $country->country_name;
             }
         }
-
         return view('admin/city/show', ['city' => $city, 'countrySelect' => $countrySelect]);
     }
 
@@ -123,7 +113,6 @@ class CityController extends Controller
     {
         $cityId = $request->get('id');
         City::getCity($cityId)->delete();
-        
         return 'true';
     }
 

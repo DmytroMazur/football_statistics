@@ -7,13 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 class Comment extends Model
 {
     protected $table = "comments";
-    protected $fillable = array('comment', 'user_id', 'city_id');
+    protected $fillable = ['comment', 'user_id', 'city_id'];
 
-    public function city(){
+    public function city()
+    {
         return $this->belongsTo(City::class);
     }
 
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
 

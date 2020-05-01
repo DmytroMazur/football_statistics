@@ -28,6 +28,7 @@ class StoreCountry extends FormRequest
             'country' => 'required'
         ];
     }
+
     public function messages()
     {
         return [

@@ -25,7 +25,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('newsletter:send')
-                                        ->dailyAt('13:00');
+            ->dailyAt('13:00');
     }
 
     /**
@@ -36,7 +36,6 @@ class Kernel extends ConsoleKernel
     protected function commands()
     {
         $this->load(__DIR__.'/Commands');
-
         require base_path('routes/console.php');
     }
 }

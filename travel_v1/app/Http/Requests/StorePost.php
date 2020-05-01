@@ -33,7 +33,6 @@ class StorePost extends FormRequest
     {
         return [
             'title.required' => 'Title is required'
-            
         ];
     }
 }

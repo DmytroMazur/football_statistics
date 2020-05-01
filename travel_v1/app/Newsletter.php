@@ -7,9 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Newsletter extends Model
 {
     protected $table = 'newsletter';
-    protected $fillable = array('email');
+    protected $fillable = ['email'];
 
-    public static function checkNewsletterEmail($email){
-        return Newsletter::whereEmail($email)->first();        
+    public static function checkNewsletterEmail($email)
+    {
+        return Newsletter::whereEmail($email)->first();
     }
 }

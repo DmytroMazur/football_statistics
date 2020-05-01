@@ -12,15 +12,14 @@ class HomeController extends Controller
 
     public function __construct()
     {
-        $this->data = array();
+        $this->data = [];
     }
 
     public function index()
     {
-        $data = array();
         $countries = Country::getCountries();
-        $data['countries'] = $countries;
-        return view('frontend/home', $data);
+        $this->data['countries'] = $countries;
+        return view('frontend/home', $this->data);
     }
 
     public function getCities(Request $request)
@@ -33,7 +32,7 @@ class HomeController extends Controller
                 $this->data[$key]['url'] = route('get-posts', $item->name);
             }
         );
-        return $this->data = json_encode($this->data);
+        return json_encode($this->data);
     }
 
 }

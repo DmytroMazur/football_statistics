@@ -355,6 +355,7 @@ class ComposerStaticInit2c80861a8c90ad6ef89432e2395f1d67
         'App\\Http\\Requests\\StoreCountry' => __DIR__ . '/../..' . '/app/Http/Requests/StoreCountry.php',
         'App\\Http\\Requests\\StoreNewsletter' => __DIR__ . '/../..' . '/app/Http/Requests/StoreNewsletter.php',
         'App\\Http\\Requests\\StorePost' => __DIR__ . '/../..' . '/app/Http/Requests/StorePost.php',
+        'App\\Listeners\\SendEmailNotification' => __DIR__ . '/../..' . '/app/Listeners/SendEmailNotification.php',
         'App\\Newsletter' => __DIR__ . '/../..' . '/app/Newsletter.php',
         'App\\Post' => __DIR__ . '/../..' . '/app/Post.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',

@@ -41,6 +41,7 @@ return array(
     'App\\Http\\Requests\\StoreCountry' => $baseDir . '/app/Http/Requests/StoreCountry.php',
     'App\\Http\\Requests\\StoreNewsletter' => $baseDir . '/app/Http/Requests/StoreNewsletter.php',
     'App\\Http\\Requests\\StorePost' => $baseDir . '/app/Http/Requests/StorePost.php',
+    'App\\Listeners\\SendEmailNotification' => $baseDir . '/app/Listeners/SendEmailNotification.php',
     'App\\Newsletter' => $baseDir . '/app/Newsletter.php',
     'App\\Post' => $baseDir . '/app/Post.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',

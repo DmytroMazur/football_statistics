@@ -14,34 +14,28 @@ Auth::routes();
 
 Route::get('/', 'frontend\HomeController@index')->name('home');
 
-Route::post('/get-cities', 'frontend\HomeController@getCities')->name('get-cities');
-
 Route::get('/posts/{cityName}', 'frontend\PostController@getCityPosts')->name('get-posts');
 
 Route::get('/posts/{city}/{post}', 'frontend\PostController@getDetailPost')->name('get-detail-post');
 
-Route::post('/posts/add-comment', 'frontend\PostController@addComment')->name('add-comment');
-
-Route::post('/store/newsletter', 'frontend\NewsletterController@storeNews')->name('store-news');
-
 Route::group(['prefix'=>'admin',  'middleware' => ['auth', 'role:admin']], function(){
-    
-    Route::get('/','admin\AdminController@index')->name('index_login');  
-    
-    Route::get('/country','admin\CountryController@index')->name('country_index');  
-    Route::get('/country/create','admin\CountryController@create')->name('create_country'); 
+
+    Route::get('/','admin\AdminController@index')->name('index_login');
+
+    Route::get('/country','admin\CountryController@index')->name('country_index');
+    Route::get('/country/create','admin\CountryController@create')->name('create_country');
     Route::post('/country/store','admin\CountryController@store')->name('store_country');
     Route::get('/country/edit/{id}','admin\CountryController@edit')->name('edit_country');
     Route::post('/country/delete','admin\CountryController@destroy')->name('delete_country');
-    
-    Route::get('/city','admin\CityController@index')->name('city_index');  
-    Route::get('/city/create','admin\CityController@create')->name('create_city'); 
+
+    Route::get('/city','admin\CityController@index')->name('city_index');
+    Route::get('/city/create','admin\CityController@create')->name('create_city');
     Route::post('/city/store','admin\CityController@store')->name('store_city');
     Route::get('/city/edit/{id}','admin\CityController@edit')->name('edit_city');
     Route::post('/city/delete','admin\CityController@destroy')->name('delete_city');
 
-    Route::get('/post','admin\PostController@index')->name('post_index');  
-    Route::get('/post/create','admin\PostController@create')->name('create_post'); 
+    Route::get('/post','admin\PostController@index')->name('post_index');
+    Route::get('/post/create','admin\PostController@create')->name('create_post');
     Route::post('/post/store','admin\PostController@store')->name('store_post');
     Route::get('/post/edit/{id}','admin\PostController@edit')->name('edit_post');
     Route::post('/post/delete','admin\PostController@destroy')->name('delete_post');

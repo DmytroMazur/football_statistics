@@ -1,5 +1,5 @@
 <footer>
-    <div id="footer">    
+    <div id="footer">
         <div class="col-sm-3" style="float:right">
             <div class="single">
                 <h2>Subscribe to our Newsletter</h2>
@@ -11,7 +11,7 @@
             </div>
             <p id="response_newsletter">  </p>
         </div>
-        </div>            
+        </div>
         <div class="container">
             <div class="row">
                 <div class="col-md-6 col-md-offset-3 text-center">
@@ -29,15 +29,16 @@
     </div>
 </footer>
 
-<script> 
+<script>
 $(document).ready(function(){
     $("#store_newsletter").click(function(e){
       e.preventDefault();
-      
-      url = "{{route('store-news')}}";
+
+      url = "{{route('api-store-news')}}";
+      console.log(url);
       emailNewsletter = $("#email_newsletter").val();
-    
-      $.ajax({
+
+      /*$.ajax({
         method: 'POST',
         headers: {
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -45,9 +46,9 @@ $(document).ready(function(){
         url: url,
         data: {
           email:emailNewsletter
-        }, 
+        },
         success: function(result){
-            
+
             $("#response_newsletter").text("you have successfully subscribed");
             $("#email").val('');
         },
@@ -55,7 +56,7 @@ $(document).ready(function(){
           var err = JSON.parse(xhr.responseText);
           alert(err.errors);
         }
-      });
+      });*/
 
     });
 });

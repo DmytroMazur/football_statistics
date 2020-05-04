@@ -22,17 +22,4 @@ class HomeController extends Controller
         return view('frontend/home', $this->data);
     }
 
-    public function getCities(Request $request)
-    {
-        $cityName = $request->get("contryName");
-        $cities = Country::getCountries($cityName);
-        $cities->city->each(
-            function ($item, $key) {
-                $this->data[$key]['name'] = $item->name;
-                $this->data[$key]['url'] = route('get-posts', $item->name);
-            }
-        );
-        return json_encode($this->data);
-    }
-
 }

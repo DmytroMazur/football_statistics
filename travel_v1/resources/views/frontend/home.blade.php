@@ -8,7 +8,7 @@
             <div class="row">
                 @foreach ($countries as $country)
                     <div class="col-md-4 col-sm-4 fh5co-item-wrap">
-                    <a class="fh5co-listing-item get_country" data-country = "{{ $country->country_name }}" data-toggle="modal" data-target="#getCities"> 
+                    <a class="fh5co-listing-item get_country" data-country = "{{ $country->country_name }}" data-toggle="modal" data-target="#getCities">
                             <img src="{{ asset('upload/frontend/img-1.jpg') }}" alt="Free HTML5 Bootstrap Template by FreeHTML5.co" class="img-responsive">
                             <div class="fh5co-listing-copy">
                             <h2>{{ $country->country_name }}</h2>
@@ -17,11 +17,11 @@
                                 </span>
                             </div>
                         </a>
-                    </div>   
+                    </div>
                 @endforeach
             {{-- <div class="col-md-4 col-sm-4 fh5co-item-wrap">
                     <a class="fh5co-listing-item">
-                        
+
                         <img src="{{ asset('upload/frontend/img-1.jpg') }}" alt="Free HTML5 Bootstrap Template by FreeHTML5.co" class="img-responsive">
                         <div class="fh5co-listing-copy">
                             <h2>Paris</h2>
@@ -41,7 +41,7 @@
                             </span>
                         </div>
                     </a>
-                </div> --}}    
+                </div> --}}
             {{-- <div class="col-md-4 col-sm-4 fh5co-item-wrap">
                     <a class="fh5co-listing-item">
                         <img src="{{ asset('upload/frontend/img-3.jpg') }}" alt="Free HTML5 Bootstrap Template by FreeHTML5.co" class="img-responsive">
@@ -52,7 +52,7 @@
                             </span>
                         </div>
                     </a>
-                </div> --}}    
+                </div> --}}
                 <!-- END 3 row -->
 
             {{--
@@ -66,8 +66,8 @@
                             </span>
                         </div>
                     </a>
-                </div> --}}    
-                
+                </div> --}}
+
                 <!-- END 3 row -->
 
             </div>
@@ -111,8 +111,8 @@
             </div>
         </div>
     </div>
-    
-    
+
+
 
     <div class="modal fade" id="getCities" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -124,9 +124,9 @@
               </button>
             </div>
             <div class="modal-body">
-              
+
             </div>
-            
+
           </div>
         </div>
       </div>
@@ -141,11 +141,12 @@
 
 <script>
     jQuery( document ).ready( function(){
-        
+
         jQuery(".get_country").on('click',function(){
-            url = "{{route('get-cities')}}";    
+            url = "{{route('api-get-cities')}}";
+
             contryName = $(this).attr('data-country');
-            
+
             $.ajax({
                 method: 'POST',
                 headers: {
@@ -154,24 +155,24 @@
                 url: url,
                 data: {
                     contryName : contryName
-                }, 
+                },
                 success: function(result){
                     var result = JSON.parse(result);
                     $(".modal-body").html('');
                     $.each( result, function( key, value ) {
                         $(".modal-body").append('<a href="' + value.url + '">'+ value.name +'</a> <br/>');
                     });
-                    
+
                 },
                 error: function(xhr, status, errors) {
                     var err = JSON.parse(xhr.responseText);
                     alert(err.errors);
                 }
             });
-        
+
         });
-    });  
-    
+    });
+
     </script>
 
 

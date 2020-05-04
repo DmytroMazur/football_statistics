@@ -12,6 +12,9 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::post('/get-cities', 'api\HomeController@getCities')->name('api-get-cities');
+
+Route::post('/store/newsletter', 'frontend\NewsletterController@storeNews')->name('api-store-news');
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();

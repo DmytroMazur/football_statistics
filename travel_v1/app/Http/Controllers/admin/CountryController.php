@@ -7,10 +7,11 @@ use App\Http\Controllers\Controller;
 use App\Country;
 use App\Http\Requests\StoreCountry;
 use App\Traits\CountryCity;
+use App\Traits\Country as apiCountry;
 
 class CountryController extends Controller
 {
-    use CountryCity;
+    use apiCountry;
 
     /**
      * Display a listing of the resource.
@@ -30,7 +31,8 @@ class CountryController extends Controller
      */
     public function create()
     {
-        return view('admin/country/show');
+        $countries = $this->getCounties();
+        return view('admin/country/show', ['countries' => $countries]);
     }
 
     /**
